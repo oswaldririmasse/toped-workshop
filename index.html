@@ -574,12 +574,7 @@ function renderPersonality(r) {
       <div class="traits-title">Traits Utama</div>
       <div class="traits-list">${r.traits.map(t=>`<span class="trait-tag">${t}</span>`).join('')}</div>
     </div>
-    <div style="text-align:center;">
-      <button class="btn-download-cards" onclick="downloadAllCards('${mbti}')" id="btn-download-cards">
-        ↓ Download All Cards
-      </button>
-      <div class="download-progress" id="download-progress"></div>
-    </div>`;
+`;
 }
 
 async function deleteRespondent(id, name) {
