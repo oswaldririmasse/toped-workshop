@@ -29,20 +29,20 @@
   --yellow: #ffe234;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'TikTokDisplay', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+body { font-family: 'TikTokDisplay', sans-serif; background: var(--grad-page-bg); color: var(--text); min-height: 100vh; }
 
-nav { background: var(--green); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+nav { background: var(--grad-nav); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
 .nav-logo { font-weight: 800; font-size: 20px; color: var(--white); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
 .nav-logo-dot { width: 10px; height: 10px; background: var(--yellow); border-radius: 50%; display: inline-block; }
 .nav-tabs { display: flex; gap: 4px; }
 .nav-tab { padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); transition: all 0.15s; font-family: 'TikTokDisplay', sans-serif; letter-spacing: 0.01em; }
 .nav-tab.active { background: var(--white); color: var(--green); }
-.nav-tab:hover:not(.active) { background: rgba(255,255,255,0.25); color: white; }
+.nav-tab:hover:not(.active) { background: rgba(255,255,255,0.25); color: white; transform: translateY(-1px); }
 
 .page { display: none; }
 .page.active { display: block; }
 
-.survey-hero { background: var(--green); padding: 3rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+.survey-hero { background: var(--grad-hero); padding: 3rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
 .survey-hero::before { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--bg); border-radius: 40px 40px 0 0; }
 .hero-eyebrow { display: none; }
 .survey-hero h1 { font-size: 38px; font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.5px; }
@@ -59,7 +59,7 @@ nav { background: var(--green); padding: 0 2rem; height: 60px; display: flex; al
 .progress-bar-wrap { margin-bottom: 2rem; }
 .progress-info { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.02em; }
 .progress-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.4s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
+.progress-fill { height: 100%; background: var(--grad-score-bar); border-radius: 4px; transition: width 0.4s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
 
 .section-label { display: flex; align-items: center; gap: 10px; margin: 2.5rem 0 1rem; }
 .section-pill { background: var(--green); color: var(--white); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 4px 12px; border-radius: 6px; }
@@ -77,12 +77,13 @@ nav { background: var(--green); padding: 0 2rem; height: 60px; display: flex; al
 .scale-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: var(--muted); padding: 0 2px; letter-spacing: 0.02em; }
 .scale-btns { display: flex; gap: 6px; }
 .scale-btn { flex: 1; height: 40px; border-radius: 10px; border: 2px solid var(--border); background: var(--bg); font-size: 14px; font-weight: 800; color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'TikTokDisplay', sans-serif; }
-.scale-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); transform: translateY(-1px); }
-.scale-btn.selected { border-color: var(--green); background: var(--green); color: white; transform: translateY(-1px); }
+.scale-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); transform: translateY(-2px) scale(1.08); box-shadow: 0 4px 12px rgba(0,170,91,0.2); }
+.scale-btn.selected { border-color: var(--green); background: var(--grad-score-bar); color: white; transform: translateY(-2px) scale(1.08); box-shadow: 0 4px 16px rgba(0,170,91,0.35); }
 
 .submit-area { margin-top: 2.5rem; text-align: center; }
 .btn-submit { background: var(--green); color: white; border: none; border-radius: 12px; padding: 15px 48px; font-size: 15px; font-weight: 800; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; width: 100%; max-width: 320px; letter-spacing: 0.02em; }
-.btn-submit:hover { background: var(--green-dark); transform: translateY(-2px); }
+.btn-submit:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,170,91,0.2); }
+.btn-submit:active { transform: translateY(0); box-shadow: none; }
 .btn-submit:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
 .submit-hint { font-size: 12px; color: var(--muted); margin-top: 10px; font-weight: 600; }
 
@@ -104,7 +105,7 @@ nav { background: var(--green); padding: 0 2rem; height: 60px; display: flex; al
 .btn-unlock { width: 100%; background: var(--green); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 15px; font-weight: 800; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; letter-spacing: 0.02em; }
 .btn-unlock:hover { background: var(--green-dark); }
 
-.admin-topbar { background: var(--green); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.admin-topbar { background: var(--grad-section-head); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 .admin-topbar h2 { font-weight: 800; font-size: 20px; color: white; }
 .admin-topbar p { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 2px; font-weight: 500; }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); display: inline-block; margin-right: 6px; animation: pulse 2s infinite; }
@@ -127,10 +128,10 @@ nav { background: var(--green); padding: 0 2rem; height: 60px; display: flex; al
 .dim-score { font-size: 30px; font-weight: 700; color: var(--green); line-height: 1; margin-bottom: 2px; }
 .dim-letter { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
 .dim-bar-wrap { height: 6px; background: var(--green-light); border-radius: 3px; overflow: hidden; position: relative; }
-.dim-bar-left { position: absolute; left: 0; top: 0; height: 100%; background: var(--green); border-radius: 3px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+.dim-bar-left { position: absolute; left: 0; top: 0; height: 100%; background: var(--grad-score-bar); border-radius: 3px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1); }
 
 .respondents-section { background: var(--white); border: 2px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
-.respondents-head { padding: 1rem 1.5rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--green-pale); }
+.respondents-head { padding: 1rem 1.5rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #e8f8f2, #f0faf5); }
 .respondents-head h3 { font-weight: 800; font-size: 15px; color: var(--text); }
 .resp-count { font-size: 12px; color: var(--green-dark); font-weight: 700; background: var(--green-light); padding: 3px 10px; border-radius: 12px; }
 table { width: 100%; border-collapse: collapse; }
@@ -138,10 +139,11 @@ th { text-align: left; font-size: 11px; font-weight: 600; color: var(--muted); p
 td { padding: 10px 1.25rem; font-size: 14px; border-bottom: 1px solid var(--border); font-weight: 500; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--green-pale); }
-.mbti-chip { display: inline-block; background: var(--green); color: white; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.05em; }
+.mbti-chip { display: inline-block; background: var(--grad-section-head); color: white; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.05em; transition: all 0.15s; }
+.mbti-chip:hover { transform: scale(1.05); }
 
 .ai-result-box { background: var(--white); border: 2px solid var(--green); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
-.ai-result-head { background: var(--green); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 10px; }
+.ai-result-head { background: var(--grad-section-head); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 10px; }
 .ai-result-head h3 { font-weight: 800; font-size: 16px; }
 .ai-badge { font-size: 11px; background: var(--yellow); color: var(--black); padding: 3px 10px; border-radius: 20px; font-weight: 700; }
 .ai-result-body { padding: 1.75rem; }
@@ -158,13 +160,14 @@ tr:hover td { background: var(--green-pale); }
 .traits-wrap { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border); }
 .traits-title { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
 .traits-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.trait-tag { background: var(--green-light); color: var(--green-xdark); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 8px; border: 1.5px solid var(--green-mid); }
+.trait-tag { background: var(--green-light); color: var(--green-xdark); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 8px; border: 1.5px solid var(--green-mid); transition: all 0.2s; cursor: default; }
+.trait-tag:hover { background: var(--green); color: white; transform: translateY(-2px) scale(1.04); box-shadow: 0 4px 12px rgba(0,170,91,0.3); }
 .tension-box { margin-top: 12px; padding: 12px 16px; background: #fffbea; border-radius: 10px; border-left: 4px solid var(--amber); font-size: 13px; color: #6b5a00; font-weight: 500; }
 .tension-box strong { color: var(--black); }
 
 
 .tov-box { background: var(--white); border: 2px solid var(--green); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
-.tov-head { background: var(--green); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 10px; }
+.tov-head { background: var(--grad-section-head); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 10px; }
 .tov-head h3 { font-weight: 800; font-size: 16px; }
 .tov-badge { font-size: 12px; background: var(--yellow); color: var(--black); padding: 4px 12px; border-radius: 20px; font-weight: 500; }
 .tov-body { padding: 1.5rem; }
@@ -172,11 +175,13 @@ tr:hover td { background: var(--green-pale); }
 .tov-traits { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 1.5rem; }
 .tov-cases { display: flex; flex-direction: column; gap: 1rem; }
 .tov-case { background: var(--green-pale); border-radius: 12px; overflow: hidden; border: 1px solid var(--green-mid); }
-.tov-case-head { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.tov-case-head { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background 0.2s; }
+.tov-case-head:hover { background: rgba(0,170,91,0.08); border-radius: 8px; }
 .tov-case-title { font-size: 13px; font-weight: 700; color: var(--green-dark); }
 .tov-case-arrow { font-size: 11px; color: var(--muted); transition: transform 0.2s; display: inline-block; }
 .btn-download-cards { background: #00AA5B; color: white; border: none; border-radius: 10px; padding: 13px 32px; font-size: 14px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 8px; margin: 1.5rem auto 0; }
-.btn-download-cards:hover { background: #009A53; transform: translateY(-1px); }
+.btn-download-cards:hover { background: #009A53; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,170,91,0.4); }
+.btn-download-cards:active { transform: translateY(0); box-shadow: none; }
 .btn-download-cards:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
 .download-progress { text-align: center; font-size: 13px; color: var(--muted); margin-top: 8px; font-weight: 600; }
 .tov-cards { overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
@@ -200,7 +205,7 @@ tr:hover td { background: var(--green-pale); }
 <nav>
   <div class="nav-logo"><span class="nav-logo-dot"></span>Toped Workshop</div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('survey', this)">Survey</button>
+    <button class="nav-tab active" onclick="showPage('survey', this)">Survei</button>
     <button class="nav-tab" onclick="showPage('admin', this)">Admin</button>
   </div>
 </nav>
@@ -261,7 +266,7 @@ tr:hover td { background: var(--green-pale); }
       <div class="admin-btns">
         <button class="btn-ghost" onclick="renderAdminContent()">↺ Refresh</button>
         <button class="btn-ghost-red" onclick="clearAllData()">Reset Data</button>
-        <button class="btn-analyze" id="btn-analyze" onclick="analyzePersonality()">✦ Analisis Personality</button>
+        <button class="btn-analyze" id="btn-analyze" onclick="analyzePersonality()">✦ Analisa Kepribadian</button>
       </div>
     </div>
     <div class="admin-wrap">
@@ -278,15 +283,15 @@ tr:hover td { background: var(--green-pale); }
       </div>
       <div class="ai-result-box" id="ai-result-box" style="display:none">
         <div class="ai-result-head">
-          <h3>Personality Toped</h3>
-          <span class="ai-badge">AI ANALYSIS</span>
+          <h3>Kepribadian Toped</h3>
+          <span class="ai-badge">ANALISA AI</span>
         </div>
         <div class="ai-result-body" id="ai-result-body"></div>
       </div>
       <div class="tov-box" id="tov-box" style="display:none">
         <div class="tov-head">
           <h3>Tone of Voice Toped</h3>
-          <span class="tov-badge">Samples</span>
+          <span class="tov-badge">CONTOH</span>
         </div>
         <div class="tov-body" id="tov-body"></div>
       </div>
@@ -654,7 +659,7 @@ function renderTOV(mbti) {
     </div>
     <div style="text-align:center;">
       <button class="btn-download-cards" onclick="downloadAllCards('${mbti}')" id="btn-download-cards">
-        ↓ Download All Cards
+        ↓ Download Semua Kartu
       </button>
       <div class="download-progress" id="download-progress"></div>
     </div>`;
@@ -674,7 +679,7 @@ async function downloadAllCards(mbti) {
   const btn = document.getElementById('btn-download-cards');
   const progress = document.getElementById('download-progress');
   btn.disabled = true;
-  btn.textContent = 'Generating...';
+  btn.textContent = 'Membuat kartu...';
 
   const data = TOV_DATA[mbti];
   if (!data) return;
@@ -693,7 +698,7 @@ async function downloadAllCards(mbti) {
 
     for (let cardIdx = 0; cardIdx < caseData.cards.length; cardIdx++) {
       cardNum++;
-      progress.textContent = `Generating card ${cardNum} of ${totalCards}...`;
+      progress.textContent = `Membuat kartu ${cardNum} of ${totalCards}...`;
       const text = caseData.cards[cardIdx];
       const png = await generateCardPNG(mbti, caseNum, caseTitle, cardIdx + 1, text);
       const filename = `${mbti}_Case${caseNum}_Card${cardIdx+1}.png`;
@@ -703,7 +708,7 @@ async function downloadAllCards(mbti) {
     }
   }
 
-  progress.textContent = 'Zipping...';
+  progress.textContent = 'Mengemas...';
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -713,8 +718,8 @@ async function downloadAllCards(mbti) {
   URL.revokeObjectURL(url);
 
   btn.disabled = false;
-  btn.innerHTML = '↓ Download All Cards';
-  progress.textContent = `✓ ${totalCards} cards downloaded!`;
+  btn.innerHTML = '↓ Download Semua Kartu';
+  progress.textContent = `✓ ${totalCards} kartu berhasil diunduh!`;
   setTimeout(() => { progress.textContent = ''; }, 3000);
 }
 
