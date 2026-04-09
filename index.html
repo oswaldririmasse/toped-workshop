@@ -718,7 +718,10 @@ async function downloadAllCards(mbti) {
   setTimeout(() => { progress.textContent = ''; }, 3000);
 }
 
-function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
+async function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
+  // Ensure TikTokDisplay fonts are loaded into canvas context
+  await document.fonts.load('bold 100px TikTokDisplay');
+  await document.fonts.load('normal 140px TikTokDisplay');
   return new Promise((resolve) => {
     const W = 1500, H = 2000;
     const canvas = document.createElement('canvas');
@@ -726,14 +729,10 @@ function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
     canvas.height = H;
     const ctx = canvas.getContext('2d');
 
-    // ── Background gradient (white to #EEEDED)
-    const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-    bgGrad.addColorStop(0, '#ffffff');
-    bgGrad.addColorStop(1, '#EEEDED');
+    const HEADER_H = 240;
+    const BORDER_R = 70;
+    const BORDER_W = 36;
 
-    const HEADER_H = 260;
-
-    // Rounded rect helper
     function roundRect(x, y, w, h, r) {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
@@ -748,89 +747,89 @@ function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
       ctx.closePath();
     }
 
-    // ── Card outer border (green gradient stroke, rx=70)
-    const borderGrad = ctx.createLinearGradient(0, 0, 0, H);
-    borderGrad.addColorStop(0, '#00AA5B');
-    borderGrad.addColorStop(1, '#004424');
+    // Clip to card shape
     ctx.save();
-    roundRect(0, 0, W, H, 70);
+    roundRect(0, 0, W, H, BORDER_R);
     ctx.clip();
 
-    // Fill background
+    // Background
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0, '#ffffff');
+    bgGrad.addColorStop(1, '#EEEDED');
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
 
-    // ── Header area (green gradient, full width, h=226)
-    const headerGrad = ctx.createLinearGradient(0, 0, 0, 226);
+    // Header green gradient
+    const headerGrad = ctx.createLinearGradient(0, 0, 0, HEADER_H);
     headerGrad.addColorStop(0, '#00713C');
     headerGrad.addColorStop(1, '#00AA5B');
     ctx.fillStyle = headerGrad;
-    ctx.fillRect(0, 0, W, 260);
+    ctx.fillRect(0, 0, W, HEADER_H);
 
-    // ── MBTI text in header - vertically centered in header
+    // MBTI centered in header
     ctx.fillStyle = '#ffffff';
-    ctx.font = '800 100px TikTokDisplay, sans-serif';
+    ctx.font = 'bold 108px TikTokDisplay, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(mbti, W / 2, 140);
+    ctx.fillText(mbti, W / 2, HEADER_H / 2);
 
-    // ── Border stroke (20px, drawn inside via clip)
+    // Border gradient stroke
+    const borderGrad = ctx.createLinearGradient(0, 0, 0, H);
+    borderGrad.addColorStop(0, '#00AA5B');
+    borderGrad.addColorStop(1, '#004424');
     ctx.strokeStyle = borderGrad;
-    ctx.lineWidth = 40;
-    roundRect(20, 20, W - 40, H - 40, 50);
+    ctx.lineWidth = BORDER_W;
+    roundRect(BORDER_W/2, BORDER_W/2, W - BORDER_W, H - BORDER_W, BORDER_R - BORDER_W/2);
     ctx.stroke();
 
     ctx.restore();
 
-    // ── Case label (green, bold, centered)
-    const caseY = 320;
+    // Case label
+    const CASE_TOP = HEADER_H + 80;
     ctx.fillStyle = '#009A53';
-    ctx.font = '800 88px TikTokDisplay, sans-serif';
+    ctx.font = 'bold 84px TikTokDisplay, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillText('Case ' + caseNum, W / 2, caseY);
-    ctx.fillText(caseTitle, W / 2, caseY + 104);
+    ctx.fillText('Case ' + caseNum, W / 2, CASE_TOP);
+    ctx.fillText(caseTitle, W / 2, CASE_TOP + 100);
 
-    // ── TOV text (black, medium weight, large, tight line height)
-    ctx.fillStyle = '#000000';
-    ctx.font = '500 160px TikTokDisplay, sans-serif';
+    // TOV text - normal weight, large, tight
+    ctx.fillStyle = '#111111';
+    ctx.font = 'normal 120px TikTokDisplay, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
 
-    // Word wrap function
-    function wrapText(ctx, text, maxWidth) {
-      const words = text.split(' ');
+    function wrapText(context, str, maxWidth) {
+      const words = str.split(' ');
       const lines = [];
-      let currentLine = '';
-      for (const word of words) {
-        const test = currentLine ? currentLine + ' ' + word : word;
-        if (ctx.measureText(test).width > maxWidth && currentLine) {
-          lines.push(currentLine);
-          currentLine = word;
+      let cur = '';
+      for (const w of words) {
+        const test = cur ? cur + ' ' + w : w;
+        if (context.measureText(test).width > maxWidth && cur) {
+          lines.push(cur);
+          cur = w;
         } else {
-          currentLine = test;
+          cur = test;
         }
       }
-      if (currentLine) lines.push(currentLine);
+      if (cur) lines.push(cur);
       return lines;
     }
 
-    const textMaxWidth = W - 160;
-    const lines = wrapText(ctx, text, textMaxWidth);
-    const lineHeight = 175;
-    const totalTextH = lines.length * lineHeight;
-    const bodyTop = caseY + 104 + 80;
-    const bodyH = H - bodyTop - 100;
-    const textStartY = bodyTop + (bodyH - totalTextH) / 2;
+    const PAD = 100;
+    const maxWidth = W - PAD * 2;
+    const lines = wrapText(ctx, text, maxWidth);
+    const LINE_H = 138;
+    const totalH = lines.length * LINE_H;
+    const bodyTop = CASE_TOP + 100 + 100;
+    const bodyH = H - bodyTop - 80;
+    const startY = bodyTop + Math.max(0, (bodyH - totalH) / 2);
 
     lines.forEach((line, i) => {
-      ctx.fillText(line, W / 2, textStartY + i * lineHeight);
+      ctx.fillText(line, W / 2, startY + i * LINE_H);
     });
 
-    // Convert to base64 PNG
-    const dataURL = canvas.toDataURL('image/png');
-    const base64 = dataURL.split(',')[1];
-    resolve(base64);
+    resolve(canvas.toDataURL('image/png').split(',')[1]);
   });
 }
 
