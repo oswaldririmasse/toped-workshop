@@ -175,8 +175,8 @@ tr:hover td { background: var(--green-pale); }
 .tov-case-head { padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
 .tov-case-title { font-size: 13px; font-weight: 700; color: var(--green-dark); }
 .tov-case-arrow { font-size: 11px; color: var(--muted); transition: transform 0.2s; display: inline-block; }
-.btn-download-cards { background: var(--text); color: white; border: none; border-radius: 10px; padding: 13px 32px; font-size: 14px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 8px; margin: 1.5rem auto 0; }
-.btn-download-cards:hover { background: #333; transform: translateY(-1px); }
+.btn-download-cards { background: #00AA5B; color: white; border: none; border-radius: 10px; padding: 13px 32px; font-size: 14px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 8px; margin: 1.5rem auto 0; }
+.btn-download-cards:hover { background: #009A53; transform: translateY(-1px); }
 .btn-download-cards:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
 .download-progress { text-align: center; font-size: 13px; color: var(--muted); margin-top: 8px; font-weight: 600; }
 .tov-cards { overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
@@ -731,6 +731,8 @@ function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
     bgGrad.addColorStop(0, '#ffffff');
     bgGrad.addColorStop(1, '#EEEDED');
 
+    const HEADER_H = 260;
+
     // Rounded rect helper
     function roundRect(x, y, w, h, r) {
       ctx.beginPath();
@@ -763,14 +765,14 @@ function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
     headerGrad.addColorStop(0, '#00713C');
     headerGrad.addColorStop(1, '#00AA5B');
     ctx.fillStyle = headerGrad;
-    ctx.fillRect(0, 0, W, 226);
+    ctx.fillRect(0, 0, W, 260);
 
-    // ── MBTI text in header
+    // ── MBTI text in header - vertically centered in header
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 96px TikTokDisplay, sans-serif';
+    ctx.font = '800 100px TikTokDisplay, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(mbti, W / 2, 113);
+    ctx.fillText(mbti, W / 2, 140);
 
     // ── Border stroke (20px, drawn inside via clip)
     ctx.strokeStyle = borderGrad;
@@ -781,23 +783,22 @@ function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
     ctx.restore();
 
     // ── Case label (green, bold, centered)
-    const caseY = 420;
+    const caseY = 320;
     ctx.fillStyle = '#009A53';
-    ctx.font = 'bold 72px TikTokDisplay, sans-serif';
+    ctx.font = '800 88px TikTokDisplay, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillText(`Case ${caseNum}`, W / 2, caseY);
-    ctx.fillText(caseTitle, W / 2, caseY + 88);
+    ctx.fillText('Case ' + caseNum, W / 2, caseY);
+    ctx.fillText(caseTitle, W / 2, caseY + 104);
 
-    // ── TOV text (black, large, centered, multiline)
+    // ── TOV text (black, medium weight, large, tight line height)
     ctx.fillStyle = '#000000';
-    ctx.font = '600 80px TikTokDisplay, sans-serif';
+    ctx.font = '500 160px TikTokDisplay, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
 
     // Word wrap function
     function wrapText(ctx, text, maxWidth) {
-      // Handle emoji by splitting carefully
       const words = text.split(' ');
       const lines = [];
       let currentLine = '';
@@ -816,10 +817,9 @@ function generateCardPNG(mbti, caseNum, caseTitle, cardNum, text) {
 
     const textMaxWidth = W - 160;
     const lines = wrapText(ctx, text, textMaxWidth);
-    const lineHeight = 100;
+    const lineHeight = 175;
     const totalTextH = lines.length * lineHeight;
-    // Start text vertically centered in body area (below case label)
-    const bodyTop = caseY + 88 + 80 + 60; // after case title + gap
+    const bodyTop = caseY + 104 + 80;
     const bodyH = H - bodyTop - 100;
     const textStartY = bodyTop + (bodyH - totalTextH) / 2;
 
