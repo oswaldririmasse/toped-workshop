@@ -526,6 +526,11 @@ Tulis dalam format JSON berikut. Tidak ada teks di luar JSON:
       body: JSON.stringify({ model: 'claude-sonnet-4-5', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
     });
     const data = await res.json();
+    console.log('Edge function response:', JSON.stringify(data));
+    if (!data.content) {
+      console.error('No content in response:', data);
+      throw new Error('Response tidak valid: ' + JSON.stringify(data));
+    }
     const text = data.content.map(c=>c.text||'').join('');
     console.log('Raw response:', text);
     const cleaned = text.replace(/```json|```/g,'').trim();
