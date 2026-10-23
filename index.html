@@ -523,7 +523,7 @@ Tulis dalam format JSON berikut. Tidak ada teks di luar JSON:
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5dmpscXdkbnVwYnRobm5qZWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyMjg3NTQsImV4cCI6MjA5MDgwNDc1NH0.L3ZE4Fc1EooOU2UWBZQy8fJNwd8lh8BwHes8mRSWQ-w',
       },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-5', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
     });
     const data = await res.json();
     const text = data.content.map(c=>c.text||'').join('');
