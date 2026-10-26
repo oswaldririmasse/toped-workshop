@@ -955,11 +955,93 @@ tr:hover td { background: #fafafa; }
 }
 
 .tov-body {
-  padding: var(--sp-32);
+  padding: var(--sp-24) var(--sp-32) var(--sp-32);
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-graphite);
-  white-space: pre-wrap;
+}
+
+/* ToV body children — rendered by JS */
+.tov-mbti {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--green-dark);
+  background: var(--green-light);
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+.tov-traits {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.tov-cases { display: flex; flex-direction: column; gap: 10px; }
+.tov-case {
+  border: 1px solid var(--border-light);
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+.tov-case-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  background: var(--bg);
+  transition: background 0.15s;
+}
+.tov-case-head:hover { background: var(--border-light); }
+.tov-case-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.tov-case-arrow { font-size: 10px; color: var(--text-muted); transition: transform 0.2s; }
+.tov-cards { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.tov-cards-inner { display: flex; flex-direction: column; gap: 0; }
+.tov-card {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-light);
+}
+.tov-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.tov-card-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-graphite);
+}
+
+/* Traits wrap — rendered by JS under personality card */
+.traits-wrap {
+  background: var(--card);
+  border-radius: var(--r-card);
+  border: 1px solid var(--border-light);
+  padding: 16px 20px;
+  margin-bottom: var(--sp-24);
+}
+.traits-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.traits-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.trait-tag {
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 /* Personality card */
@@ -968,8 +1050,8 @@ tr:hover td { background: #fafafa; }
   border-radius: var(--r-card-feat);
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border-light);
-  padding: var(--sp-40);
-  margin-bottom: var(--sp-24);
+  padding: var(--sp-32) var(--sp-40) var(--sp-32);
+  margin-bottom: var(--sp-16);
   text-align: center;
 }
 
@@ -980,16 +1062,16 @@ tr:hover td { background: #fafafa; }
   letter-spacing: -0.05em;
   color: var(--text-primary);
   line-height: 1;
-  margin-bottom: var(--sp-12);
+  margin-bottom: 8px;
 }
 
 .mbti-name,
 .archetype-name {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--green);
   letter-spacing: -0.02em;
-  margin-bottom: var(--sp-16);
+  margin-bottom: 12px;
 }
 
 .mbti-desc {
