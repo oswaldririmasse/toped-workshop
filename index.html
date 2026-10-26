@@ -1076,7 +1076,7 @@ tr:hover td { background: #fafafa; }
   border-radius: var(--r-card-feat);
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border-light);
-  padding: var(--sp-16) var(--sp-32) var(--sp-20);
+  padding: var(--sp-12) var(--sp-24) var(--sp-16);
   margin-bottom: var(--sp-12);
   text-align: center;
 }
@@ -1088,7 +1088,7 @@ tr:hover td { background: #fafafa; }
   letter-spacing: -0.05em;
   color: var(--text-primary);
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .mbti-name,
@@ -1097,7 +1097,7 @@ tr:hover td { background: #fafafa; }
   font-weight: 700;
   color: var(--green);
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .mbti-desc {
@@ -1571,13 +1571,13 @@ function renderPersonality(r) {
       <div class="archetype-name">${r.archetype}</div>
       <div style="text-align:left;">
         ${descParagraphs}
-        <div style="margin-top:8px;display:inline-block;width:100%;">
-          <div onclick="toggleSection('tension')" style="cursor:pointer;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;background:#fffbea;border-radius:10px;border:1px solid #e8d87a;">
+        <div style="margin-top:4px;display:inline-block;width:100%;border:1px solid #e8d87a;border-radius:10px;overflow:hidden;">
+          <div onclick="toggleSection('tension')" style="cursor:pointer;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;background:#fffbea;">
             <strong style="font-size:13px;color:var(--black);">Area diskusi</strong>
             <span id="arrow-tension" style="font-size:11px;color:var(--muted);transition:transform 0.2s;display:inline-block;margin-left:16px;flex-shrink:0;">▶</span>
           </div>
           <div id="tension-content" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;">
-            <div style="background:#fffbea;border:1px solid #e8d87a;border-top:none;border-radius:0 0 10px 10px;padding:10px 14px 12px;">${tensionItems}</div>
+            <div style="background:#fffbea;border-top:1px solid #e8d87a;padding:10px 14px 12px;">${tensionItems}</div>
           </div>
         </div>
       </div>
