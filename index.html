@@ -35,6 +35,13 @@
   --text-muted:     #8f8f8f;
   --text-accent:    #00AA5B;
 
+  /* Aliases (used in older JS inline styles) */
+  --text:     #2e2e2e;
+  --black:    #000000;
+  --muted:    #8f8f8f;
+  --red:      #e53e3e;
+  --amber:    #d97706;
+
   /* Borders */
   --border:       #e0e0e0;
   --border-light: #f0f0f0;
@@ -588,25 +595,28 @@ nav {
 
 /* Admin topbar */
 .admin-topbar {
-  background: var(--text-primary);
-  color: #fff;
+  background: var(--canvas);
+  color: var(--text-primary);
   padding: var(--sp-24) var(--sp-32);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--sp-16);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-nav);
 }
 
 .admin-topbar h2 {
   font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 .admin-topbar p {
   font-size: 13px;
-  opacity: 0.6;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -624,9 +634,9 @@ nav {
 .admin-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .btn-ghost {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: var(--border-light);
+  color: var(--text-graphite);
+  border: 1px solid var(--border);
   border-radius: var(--r-btn);
   padding: 10px 20px;
   font-size: 13px;
@@ -636,12 +646,12 @@ nav {
   transition: all 0.2s;
 }
 
-.btn-ghost:hover { background: rgba(255,255,255,0.2); }
+.btn-ghost:hover { background: var(--border); }
 
 .btn-ghost-red {
-  background: rgba(229,62,62,0.15);
-  color: #fc8181;
-  border: 1px solid rgba(229,62,62,0.3);
+  background: rgba(229,62,62,0.08);
+  color: #e53e3e;
+  border: 1px solid rgba(229,62,62,0.25);
   border-radius: var(--r-btn);
   padding: 10px 20px;
   font-size: 13px;
@@ -651,7 +661,7 @@ nav {
   transition: all 0.2s;
 }
 
-.btn-ghost-red:hover { background: rgba(229,62,62,0.25); }
+.btn-ghost-red:hover { background: rgba(229,62,62,0.15); }
 
 .btn-analyze {
   background: var(--green);
@@ -709,6 +719,63 @@ nav {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+/* Summary card rendered via JS */
+.summary-card .dim-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-top: 0;
+  margin-top: 0;
+  display: block;
+}
+
+.summary-card .dim-score {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.summary-card .dim-letter {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.dim-bar-wrap {
+  background: var(--border-light);
+  border-radius: 99px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.dim-bar-left {
+  height: 100%;
+  background: var(--green);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+/* MBTI chip in table */
+.mbti-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 /* Score tiles from JS */
@@ -906,7 +973,8 @@ tr:hover td { background: #fafafa; }
   text-align: center;
 }
 
-.mbti-type {
+.mbti-type,
+.mbti-big {
   font-size: 72px;
   font-weight: 800;
   letter-spacing: -0.05em;
@@ -915,10 +983,12 @@ tr:hover td { background: #fafafa; }
   margin-bottom: var(--sp-12);
 }
 
-.mbti-name {
-  font-size: 20px;
-  font-weight: 600;
+.mbti-name,
+.archetype-name {
+  font-size: 22px;
+  font-weight: 700;
   color: var(--green);
+  letter-spacing: -0.02em;
   margin-bottom: var(--sp-16);
 }
 
