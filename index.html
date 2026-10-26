@@ -32,11 +32,25 @@
   --grad-section-head: linear-gradient(135deg, #003d22 0%, #00713C 100%);
   --grad-page-bg: linear-gradient(180deg, #eaf6f1 0%, #d8f0e6 100%);
   --grad-score-bar: linear-gradient(to right, #00AA5B, #00d473);
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.06);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.08);
+  --shadow-lg:  0 16px 80px rgba(0,0,0,0.10);
+  --shadow-xl:  0 24px 120px rgba(0,0,0,0.12);
+  --shadow-nav: 0 8px 32px rgba(0,0,0,0.08);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  --radius-xl: 40px;
+  --radius-pill: 999px;
+  --surface: #ffffff;
+  --surface-2: #F0F4F1;
+  --border-soft: rgba(0,0,0,0.06);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'TikTokDisplay', sans-serif; background: var(--grad-page-bg); color: var(--text); min-height: 100vh; }
 
-nav { background: var(--grad-nav); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+nav { background: transparent; padding: 12px 1rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-inner { background: rgba(0,61,34,0.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: var(--radius-pill); padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; width: 100%; box-shadow: var(--shadow-nav); border: 1px solid rgba(255,255,255,0.1); }
 .nav-logo { font-weight: 800; font-size: 20px; color: var(--white); letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
 .nav-logo-dot { width: 10px; height: 10px; background: var(--yellow); border-radius: 50%; display: inline-block; }
 .nav-tabs { display: flex; gap: 4px; }
@@ -48,45 +62,45 @@ nav { background: var(--grad-nav); padding: 0 2rem; height: 60px; display: flex;
 .page.active { display: block; }
 
 .survey-hero { background: var(--grad-hero); padding: 3rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
-.survey-hero::before { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px; background: var(--bg); border-radius: 40px 40px 0 0; }
+.survey-hero::before { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 60px; background: var(--bg); border-radius: 60px 60px 0 0; }
 .hero-eyebrow { display: none; }
 .survey-hero h1 { font-size: 38px; font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.5px; }
 .survey-hero p { color: rgba(255,255,255,0.82); font-size: 15px; line-height: 1.65; max-width: 480px; margin: 0 auto; font-weight: 400; }
 
 .survey-wrap { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-.name-field { background: var(--white); border: 2px solid var(--border); border-radius: 16px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.name-field { background: var(--surface); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-md); }
 .name-field label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-.name-field input { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 11px 14px; font-size: 15px; font-family: 'TikTokDisplay', sans-serif; font-weight: 500; outline: none; transition: border-color 0.15s; background: var(--bg); color: var(--text); }
-.name-field input:focus { border-color: var(--green); background: var(--white); }
+.name-field input { width: 100%; border: 1.5px solid rgba(0,0,0,0.1); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 15px; font-family: 'TikTokDisplay', sans-serif; font-weight: 500; outline: none; transition: border-color 0.2s, box-shadow 0.2s; background: var(--surface-2); color: var(--text); }
+.name-field input:focus { border-color: var(--green); background: var(--surface); box-shadow: 0 0 0 3px rgba(0,170,91,0.12); }
 .name-field input::placeholder { color: var(--muted); font-weight: 400; }
 
 .progress-bar-wrap { margin-bottom: 2rem; }
 .progress-info { display: flex; justify-content: space-between; font-size: 12px; font-weight: 400; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.02em; }
-.progress-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.progress-track { height: 6px; background: rgba(0,0,0,0.06); border-radius: var(--radius-pill); overflow: hidden; }
 .progress-fill { height: 100%; background: var(--grad-score-bar); border-radius: 4px; transition: width 0.4s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
 
 .section-label { display: flex; align-items: center; gap: 10px; margin: 2.5rem 0 1rem; }
-.section-pill { background: var(--green); color: var(--white); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 4px 12px; border-radius: 6px; }
+.section-pill { background: var(--green); color: var(--white); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 5px 14px; border-radius: var(--radius-pill); }
 .section-desc { font-size: 12px; color: var(--muted); font-weight: 400; }
 .section-line { flex: 1; height: 2px; background: var(--border); border-radius: 1px; }
 
 .q-card { background: var(--white); border: 2px solid var(--border); border-radius: 16px; padding: 1.25rem 1.5rem; margin-bottom: 12px; transition: border-color 0.15s; }
 .q-card:hover { border-color: var(--green-mid); }
 .q-card.answered { border-color: var(--green); background: var(--green-pale); }
-.q-num { display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+.q-num { display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: var(--radius-pill); margin-bottom: 10px; letter-spacing: 0.04em; }
 .q-card.answered .q-num { background: var(--green); color: white; }
 .q-text { font-size: 14px; line-height: 1.7; color: var(--text); margin-bottom: 1rem; font-weight: 400; }
 
 .scale-wrap { display: flex; flex-direction: column; gap: 8px; }
 .scale-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: 400; color: var(--muted); padding: 0 2px; letter-spacing: 0.02em; }
 .scale-btns { display: flex; gap: 6px; }
-.scale-btn { flex: 1; height: 40px; border-radius: 10px; border: 2px solid var(--border); background: var(--bg); font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease, background 0.15s ease, border-color 0.15s ease; font-family: 'TikTokDisplay', sans-serif; }
+.scale-btn { flex: 1; height: 44px; border-radius: var(--radius-md); border: 1.5px solid var(--border); background: var(--surface); font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease, background 0.15s ease, border-color 0.15s ease; font-family: 'TikTokDisplay', sans-serif; box-shadow: var(--shadow-sm); }
 .scale-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); transform: translateY(-2px) scale(1.08); box-shadow: 0 4px 12px rgba(0,170,91,0.2); }
 .scale-btn.selected { border-color: var(--green); background: var(--grad-score-bar); color: white; transform: translateY(-2px) scale(1.08); box-shadow: 0 4px 16px rgba(0,170,91,0.35); }
 
 .submit-area { margin-top: 2.5rem; text-align: center; }
-.btn-submit { background: var(--green); color: white; border: none; border-radius: 12px; padding: 15px 48px; font-size: 15px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease, background 0.15s ease; width: 100%; max-width: 320px; letter-spacing: 0.01em; }
+.btn-submit { background: var(--green); color: white; border: none; border-radius: var(--radius-pill); padding: 16px 48px; font-size: 15px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease, background 0.15s ease; width: 100%; max-width: 320px; letter-spacing: 0.01em; box-shadow: 0 4px 20px rgba(0,170,91,0.3); }
 .btn-submit:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,170,91,0.2); }
 .btn-submit:active { transform: translateY(0); box-shadow: none; }
 .btn-submit:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
@@ -96,7 +110,7 @@ nav { background: var(--grad-nav); padding: 0 2rem; height: 60px; display: flex;
 .thankyou-icon { width: 80px; height: 80px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 36px; }
 .thankyou-wrap h2 { font-weight: 800; font-size: 28px; margin-bottom: 0.75rem; color: var(--text); }
 .thankyou-wrap p { color: var(--muted); font-size: 15px; line-height: 1.7; font-weight: 400; }
-.thankyou-sub { margin-top: 2rem; display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: 8px; }
+.thankyou-sub { margin-top: 2rem; display: inline-block; background: var(--green-light); color: var(--green-dark); font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: var(--radius-pill); }
 
 .lock-screen { max-width: 420px; margin: 5rem auto; padding: 1.5rem; text-align: center; }
 .lock-card { background: var(--white); border: 2px solid var(--border); border-radius: 20px; padding: 2.5rem 2rem; }
@@ -119,9 +133,9 @@ nav { background: var(--grad-nav); padding: 0 2rem; height: 60px; display: flex;
 .btn-analyze { background: var(--yellow); color: var(--black); border: none; border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 800; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; white-space: nowrap; letter-spacing: 0.02em; }
 .btn-analyze:hover { background: #e6d000; transform: translateY(-1px); }
 .btn-analyze:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
-.btn-ghost { background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: white; border-radius: 8px; padding: 9px 14px; font-size: 13px; font-weight: 600; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; }
+.btn-ghost { background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: white; border-radius: var(--radius-pill); padding: 9px 16px; font-size: 13px; font-weight: 600; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.18s; }
 .btn-ghost:hover { background: rgba(255,255,255,0.25); }
-.btn-ghost-red { background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: rgba(255,180,180,1); border-radius: 8px; padding: 9px 14px; font-size: 13px; font-weight: 600; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; }
+.btn-ghost-red { background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); color: rgba(255,180,180,1); border-radius: var(--radius-pill); padding: 9px 16px; font-size: 13px; font-weight: 600; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.18s; }
 .btn-ghost-red:hover { background: rgba(220,50,50,0.3); }
 
 .admin-wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
@@ -138,19 +152,19 @@ nav { background: var(--grad-nav); padding: 0 2rem; height: 60px; display: flex;
 .respondents-section { background: var(--white); border: 2px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
 .respondents-head { padding: 1rem 1.5rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #e8f8f2, #f0faf5); }
 .respondents-head h3 { font-weight: 800; font-size: 15px; color: var(--text); }
-.resp-count { font-size: 12px; color: var(--green-dark); font-weight: 600; background: var(--green-light); padding: 3px 10px; border-radius: 12px; }
+.resp-count { font-size: 12px; color: var(--green-dark); font-weight: 600; background: var(--green-light); padding: 4px 12px; border-radius: var(--radius-pill); }
 table { width: 100%; border-collapse: collapse; }
 th { text-align: left; font-size: 11px; font-weight: 500; color: var(--muted); padding: 10px 1.25rem; border-bottom: 2px solid var(--border); background: var(--bg); letter-spacing: 0.06em; text-transform: uppercase; }
 td { padding: 10px 1.25rem; font-size: 14px; border-bottom: 1px solid var(--border); font-weight: 400; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--green-pale); }
-.mbti-chip { display: inline-block; background: var(--grad-section-head); color: white; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 6px; letter-spacing: 0.05em; transition: all 0.15s; }
+.mbti-chip { display: inline-block; background: var(--grad-section-head); color: white; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-pill); letter-spacing: 0.04em; transition: all 0.15s; }
 .mbti-chip:hover { transform: scale(1.05); }
 
 .ai-result-box { background: var(--white); border: 2px solid var(--green); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
 .ai-result-head { background: var(--grad-section-head); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 10px; }
 .ai-result-head h3 { font-weight: 800; font-size: 16px; }
-.ai-badge { font-size: 11px; background: var(--yellow); color: var(--black); padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+.ai-badge { font-size: 11px; background: var(--yellow); color: var(--black); padding: 4px 12px; border-radius: var(--radius-pill); font-weight: 600; }
 .ai-result-body { padding: 1.75rem; }
 .ai-result-body.loading { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 14px; font-weight: 400; }
 .spinner { width: 20px; height: 20px; border: 3px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
@@ -158,14 +172,14 @@ tr:hover td { background: var(--green-pale); }
 
 .personality-card { display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start; }
 @media (max-width: 540px) { .personality-card { grid-template-columns: 1fr; } }
-.mbti-big { font-size: 64px; font-weight: 800; color: var(--green); line-height: 1; letter-spacing: -2px; background: var(--green-light); padding: 1rem 1.25rem; border-radius: 16px; min-width: 120px; text-align: center; }
+.mbti-big { font-size: 64px; font-weight: 800; color: var(--green); line-height: 1; letter-spacing: -2px; background: var(--green-light); padding: 1rem 1.5rem; border-radius: var(--radius-lg); min-width: 130px; text-align: center; box-shadow: 0 8px 30px rgba(0,170,91,0.15); }
 .archetype-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
 .tagline-text { font-size: 14px; color: var(--green-dark); margin-bottom: 12px; font-weight: 400; font-style: italic; }
 .archetype-desc { font-size: 14px; line-height: 1.8; color: var(--text); font-weight: 400; }
 .traits-wrap { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border); }
 .traits-title { font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
 .traits-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.trait-tag { background: var(--green-light); color: var(--green-xdark); font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 8px; border: 1.5px solid var(--green-mid); transition: all 0.18s cubic-bezier(.22,.68,0,1.2); cursor: default; }
+.trait-tag { background: var(--green-light); color: var(--green-xdark); font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: var(--radius-pill); border: 1px solid var(--green-mid); transition: all 0.18s cubic-bezier(.22,.68,0,1.2); cursor: default; }
 .trait-tag:hover { background: var(--green); color: #fff; border-color: var(--green); transform: translateY(-2px) scale(1.04); box-shadow: 0 4px 14px rgba(0,170,91,0.28); }
 .trait-tag:hover { background: var(--green); color: white; transform: translateY(-2px) scale(1.04); box-shadow: 0 4px 12px rgba(0,170,91,0.3); }
 .tension-box { margin-top: 12px; padding: 12px 16px; background: #fffbea; border-radius: 10px; border-left: 4px solid var(--amber); font-size: 13px; color: #6b5a00; font-weight: 500; }
@@ -175,7 +189,7 @@ tr:hover td { background: var(--green-pale); }
 .tov-box { background: var(--white); border: 2px solid var(--green); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
 .tov-head { background: var(--grad-section-head); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 10px; }
 .tov-head h3 { font-weight: 800; font-size: 16px; }
-.tov-badge { font-size: 12px; background: var(--yellow); color: var(--black); padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+.tov-badge { font-size: 12px; background: var(--yellow); color: var(--black); padding: 4px 14px; border-radius: var(--radius-pill); font-weight: 500; }
 .tov-body { padding: 1.5rem; }
 .tov-mbti { font-size: 28px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
 .tov-traits { font-size: 13px; color: var(--muted); font-weight: 400; margin-bottom: 1.5rem; }
@@ -185,7 +199,7 @@ tr:hover td { background: var(--green-pale); }
 .tov-case-head:hover { background: rgba(0,170,91,0.08); border-radius: 8px; }
 .tov-case-title { font-size: 13px; font-weight: 700; color: var(--green-dark); }
 .tov-case-arrow { font-size: 11px; color: var(--muted); transition: transform 0.2s; display: inline-block; }
-.btn-download-cards { background: #00AA5B; color: white; border: none; border-radius: 10px; padding: 13px 32px; font-size: 14px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 8px; margin: 1.5rem auto 0; }
+.btn-download-cards { background: #00AA5B; color: white; border: none; border-radius: var(--radius-pill); padding: 14px 32px; font-size: 14px; font-weight: 700; font-family: 'TikTokDisplay', sans-serif; cursor: pointer; transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease, background 0.15s ease; display: flex; align-items: center; gap: 8px; margin: 1.5rem auto 0; box-shadow: 0 4px 20px rgba(0,170,91,0.3); }
 .btn-download-cards:hover { background: #009A53; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,170,91,0.4); }
 .btn-download-cards:active { transform: translateY(0); box-shadow: none; }
 .btn-download-cards:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
