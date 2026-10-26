@@ -1571,15 +1571,15 @@ function renderPersonality(r) {
       <div class="archetype-name">${r.archetype}</div>
       <div style="text-align:left;">
         ${descParagraphs}
-        <div class="tov-case" style="margin-top:2px;">
-          <div class="tov-case-head" onclick="toggleSection('tension')">
-            <span class="tov-case-title">Area diskusi</span>
-            <span id="arrow-tension" class="tov-case-arrow">▶</span>
-          </div>
-          <div id="tension-content" class="tov-cards">
-            <div class="tov-cards-inner">${tensionItems}</div>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="tov-case" style="margin-top:4px;margin-bottom:var(--sp-8);">
+      <div class="tov-case-head" onclick="toggleSection('tension')">
+        <span class="tov-case-title">Area diskusi</span>
+        <span id="arrow-tension" class="tov-case-arrow">▶</span>
+      </div>
+      <div id="tension-content" class="tov-cards">
+        <div class="tov-cards-inner">${tensionItems}</div>
       </div>
     </div>
     <div class="traits-wrap">
