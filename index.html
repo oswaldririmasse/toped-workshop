@@ -1011,9 +1011,9 @@ tr:hover td { background: #fafafa; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 10px 16px;
   cursor: pointer;
-  background: var(--bg);
+  background: var(--card);
   transition: background 0.15s;
 }
 .tov-case-head:hover { background: var(--border-light); }
@@ -1022,7 +1022,7 @@ tr:hover td { background: #fafafa; }
 .tov-cards { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .tov-cards-inner { display: flex; flex-direction: column; gap: 0; }
 .tov-card {
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-top: 1px solid var(--border-light);
 }
 .tov-card-label {
@@ -1614,7 +1614,7 @@ function toggleSection(id) {
   const arrow = document.getElementById('arrow-' + id);
   if (!wrap) return;
   const isOpen = wrap.style.maxHeight !== '0px' && wrap.style.maxHeight !== '';
-  wrap.style.maxHeight = isOpen ? '0px' : (id === 'respondents' ? '2000px' : '600px');
+  wrap.style.maxHeight = isOpen ? '0px' : wrap.scrollHeight + 'px';
   if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
 }
 
@@ -1673,7 +1673,7 @@ function toggleTOVCase(ci) {
   const arrow = document.getElementById('tov-arrow-' + ci);
   if (!cards) return;
   const isOpen = cards.style.maxHeight && cards.style.maxHeight !== '0px';
-  cards.style.maxHeight = isOpen ? '0px' : '600px';
+  cards.style.maxHeight = isOpen ? '0px' : cards.scrollHeight + 'px';
   if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
 }
 
