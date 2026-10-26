@@ -27,7 +27,8 @@
   /* Surface / Canvas — all white, differentiated by shadow */
   --canvas:       #ffffff;
   --card:         #ffffff;
-  --nav-bg:       #ffffff;
+  --nav-bg:       rgba(255,255,255,0.88);
+  --bg:           transparent;
 
   /* Text */
   --text-primary:   #000000;
@@ -76,7 +77,8 @@
 
 body {
   font-family: 'TikTokDisplay', 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-  background: #F4F7F4;
+  background: linear-gradient(180deg, #FFFFEC 0%, #E4FFEE 100%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-size: 16px;
   line-height: 1.5;
@@ -277,7 +279,7 @@ nav {
 
 .progress-track {
   height: 4px;
-  background: var(--border-light);
+  background: rgba(255,255,255,0.7);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -357,7 +359,7 @@ nav {
   box-shadow: var(--shadow-card2);
   padding: var(--sp-32);
   margin-bottom: var(--sp-24);
-  border: 1px solid var(--border-light);
+  border: 1px solid #ffffff;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -403,9 +405,9 @@ nav {
 .scale-btn {
   flex: 1;
   aspect-ratio: 1;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid rgba(0,170,91,0.25);
   border-radius: 50%;
-  background: var(--canvas);
+  background: rgba(255,255,255,0.7);
   font-size: 14px;
   font-weight: 600;
   color: var(--text-muted);
@@ -680,6 +682,26 @@ nav {
 .btn-analyze:hover { background: var(--green-dark); transform: translateY(-1px); }
 .btn-analyze:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
+.btn-download-cards {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-btn);
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(0,170,91,0.25);
+  margin-top: var(--sp-16);
+}
+.btn-download-cards:hover { background: var(--green-dark); transform: translateY(-1px); }
+.btn-download-cards:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
 /* Admin content */
 .admin-wrap {
   max-width: 900px;
@@ -913,7 +935,7 @@ tr:hover td { background: #fafafa; }
 }
 
 .ai-result-body {
-  padding: var(--sp-32);
+  padding: var(--sp-16) var(--sp-24) var(--sp-24);
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-graphite);
@@ -1019,11 +1041,15 @@ tr:hover td { background: #fafafa; }
 
 /* Traits wrap — rendered by JS under personality card */
 .traits-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
   background: var(--card);
   border-radius: var(--r-card);
   border: 1px solid var(--border-light);
-  padding: 16px 20px;
-  margin-bottom: var(--sp-24);
+  padding: 12px 16px;
+  margin-bottom: var(--sp-12);
 }
 .traits-title {
   font-size: 11px;
@@ -1031,14 +1057,14 @@ tr:hover td { background: #fafafa; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  white-space: nowrap;
 }
-.traits-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.traits-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .trait-tag {
   background: var(--green-light);
   color: var(--green-dark);
   border-radius: 999px;
-  padding: 4px 12px;
+  padding: 3px 10px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1050,28 +1076,28 @@ tr:hover td { background: #fafafa; }
   border-radius: var(--r-card-feat);
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border-light);
-  padding: var(--sp-32) var(--sp-40) var(--sp-32);
-  margin-bottom: var(--sp-16);
+  padding: var(--sp-24) var(--sp-40) var(--sp-24);
+  margin-bottom: var(--sp-12);
   text-align: center;
 }
 
 .mbti-type,
 .mbti-big {
-  font-size: 72px;
+  font-size: 64px;
   font-weight: 800;
   letter-spacing: -0.05em;
   color: var(--text-primary);
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .mbti-name,
 .archetype-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--green);
   letter-spacing: -0.02em;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .mbti-desc {
@@ -1542,13 +1568,13 @@ function renderPersonality(r) {
   body.innerHTML = `
     <div class="personality-card">
       <div class="mbti-big">${r.mbti}</div>
-      <div>
-        <div class="archetype-name">${r.archetype}</div>
+      <div class="archetype-name">${r.archetype}</div>
+      <div style="text-align:left;">
         ${descParagraphs}
         <div style="margin-top:12px;background:#fffbea;border-radius:10px;overflow:hidden;border:1px solid #e8d87a;">
-          <div onclick="toggleSection('tension')" style="cursor:pointer;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
+          <div onclick="toggleSection('tension')" style="cursor:pointer;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;">
             <strong style="font-size:13px;color:var(--black);">Area diskusi</strong>
-            <span id="arrow-tension" style="font-size:11px;color:var(--muted);transition:transform 0.2s;">▼</span>
+            <span id="arrow-tension" style="font-size:11px;color:var(--muted);transition:transform 0.2s;display:inline-block;">▶</span>
           </div>
           <div id="tension-content" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;">
             <div style="padding:0 16px 14px;">${tensionItems}</div>
@@ -1593,7 +1619,7 @@ function toggleSection(id) {
   if (!wrap) return;
   const isOpen = wrap.style.maxHeight !== '0px' && wrap.style.maxHeight !== '';
   wrap.style.maxHeight = isOpen ? '0px' : (id === 'respondents' ? '2000px' : '600px');
-  if (arrow) arrow.style.transform = isOpen ? 'rotate(-90deg)' : 'rotate(0deg)';
+  if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
 }
 
 function showToast(msg) {
