@@ -1005,7 +1005,8 @@ tr:hover td { background: #fafafa; }
 .tov-case {
   border: 1px solid var(--border-light);
   border-radius: var(--r-card);
-  overflow: hidden;
+  overflow: clip;
+  contain: layout;
 }
 .tov-case-head {
   display: flex;
@@ -1019,7 +1020,7 @@ tr:hover td { background: #fafafa; }
 .tov-case-head:hover { background: var(--border-light); }
 .tov-case-title { font-size: 13px; font-weight: 600; color: var(--text-primary); }
 .tov-case-arrow { font-size: 10px; color: var(--text-muted); transition: transform 0.2s; }
-.tov-cards { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.tov-cards { max-height: 0; overflow: clip; transition: max-height 0.3s ease; }
 .tov-cards-inner { display: flex; flex-direction: column; gap: 0; }
 .tov-card {
   padding: 10px 16px;
@@ -1072,9 +1073,17 @@ tr:hover td { background: #fafafa; }
 
 /* Personality card */
 .personality-card {
-  padding: var(--sp-12) var(--sp-8) var(--sp-8);
+  padding: var(--sp-12) var(--sp-8) 0;
   margin-bottom: 0;
   text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.personality-card > div:not(.mbti-big):not(.archetype-name) {
+  width: 100%;
 }
 
 .mbti-type,
@@ -1559,7 +1568,8 @@ Tulis dalam format JSON berikut. Tidak ada teks di luar JSON:
 function renderPersonality(r) {
   const body = document.getElementById('ai-result-body');
   body.className = 'ai-result-body';
-  const descParagraphs = r.description.split('\n').filter(p=>p.trim()).map(p=>`<p style="font-size:14px;line-height:1.6;color:var(--text);font-weight:500;margin-bottom:0.5rem;">${p}</p>`).join('');
+  const descArr = r.description.split('\n').filter(p=>p.trim());
+  const descParagraphs = descArr.map((p,i)=>`<p style="font-size:14px;line-height:1.6;color:var(--text);font-weight:500;margin-bottom:${i<descArr.length-1?'0.5rem':'0'};">${p}</p>`).join('');
   const tensionItems = r.tension.split('\n').filter(q=>q.trim()).map((q,i)=>`<div class="tov-card"><div class="tov-card-label">Poin ${i+1}</div><div class="tov-card-text">${q}</div></div>`).join('');
   body.innerHTML = `
     <div class="personality-card">
@@ -1574,7 +1584,7 @@ function renderPersonality(r) {
         <span class="tov-case-title">Area diskusi</span>
         <span id="arrow-tension" class="tov-case-arrow">▶</span>
       </div>
-      <div id="tension-content" class="tov-cards">
+      <div id="tension-content" class="tov-cards" style="max-height:0">
         <div class="tov-cards-inner">${tensionItems}</div>
       </div>
     </div>
