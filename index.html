@@ -647,6 +647,12 @@ nav {
   cursor: pointer;
   transition: all 0.2s;
 }
+.btn-refresh-icon {
+  padding: 10px 14px;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+}
 
 .btn-ghost:hover { background: var(--border); }
 
@@ -657,7 +663,7 @@ nav {
   border-radius: var(--r-btn);
   padding: 10px 20px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s;
@@ -1084,7 +1090,7 @@ tr:hover td { background: #fafafa; }
 /* Personality card */
 .personality-card {
   padding: var(--sp-12) var(--sp-8) 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   text-align: center;
   overflow: hidden;
   display: flex;
@@ -1281,7 +1287,7 @@ tr:hover td { background: #fafafa; }
         <p><span class="status-dot"></span>Terhubung ke Supabase</p>
       </div>
       <div class="admin-btns">
-        <button class="btn-ghost" onclick="renderAdminContent()">↺ Refresh</button>
+        <button class="btn-ghost btn-refresh-icon" onclick="renderAdminContent()">↺</button>
         <button class="btn-ghost-red" onclick="clearAllData()">Reset Data</button>
         <button class="btn-analyze" id="btn-analyze" onclick="analyzePersonality()">✦ Analisa Kepribadian</button>
       </div>
@@ -1506,7 +1512,7 @@ Panduan penulisan WAJIB diikuti:
   Paragraf 3: cara dia mengambil keputusan, apa yang jadi prioritasnya.
   Paragraf 4: emotional tone. Fokus ke bagaimana rasanya berinteraksi dengan Toped dari sisi user. Harus terasa warm dan positif, bukan kering atau judgmental. Gambarkan vibe-nya, bukan cuma cara bicaranya.
   Paragraf 5: hal yang perlu dijaga atau blind spot Toped. Tulis dengan nada konstruktif, bukan kritik.
-- traits: 5 kata atau frasa singkat, mix Indonesia dan Inggris yang natural, langsung nangkep, tidak overlap satu sama lain. Hindari kata slang atau terlalu informal seperti 'banget' — gunakan versi yang lebih rapi seperti 'sangat' atau 'highly'. Contoh yang baik: 'Sangat adaptif', 'Quick thinker', 'Solution-oriented'.
+- traits: 5 short English words or phrases, distinct and immediately clear, no overlap between them. Avoid Indonesian or mixed-language. Examples: 'Deeply empathetic', 'Contextual thinker', 'Solution-oriented', 'Quietly confident', 'Value-driven'.
 - tension: 3 pertanyaan diskusi terbuka yang konkret dan relevan untuk tim yang mendefinisikan karakter Toped. Pisahkan tiap pertanyaan dengan newline.
 
 Panduan emotional tone berdasarkan skor:
